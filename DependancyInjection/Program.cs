@@ -1,3 +1,5 @@
+using DependancyInjection;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -6,6 +8,11 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+//builder.Services.AddScoped<INumberGenerator, NumGenerator>();
+builder.Services.AddScoped<INumberGenerator, NumGenerator>();
+builder.Services.AddSingleton<INumGenerator2, NumGenerator2>();
+//builder.Services.AddSingleton<INumberGenerator, NumGenerator>();
 
 var app = builder.Build();
 
@@ -23,3 +30,5 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+
